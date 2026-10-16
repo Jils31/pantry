@@ -38,9 +38,14 @@ variable "cluster_version" {
   default = "1.31"
 }
 
-variable "node_instance_type" {
+variable "node_instance_types" {
+  type    = list(string)
+  default = ["t3.medium", "t3a.medium", "t2.medium"]
+}
+
+variable "node_capacity_type" {
   type    = string
-  default = "t3.medium"
+  default = "SPOT"
 }
 
 variable "node_desired" {
