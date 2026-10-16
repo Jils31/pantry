@@ -169,6 +169,11 @@ Credentials come from the environment or an AWS CLI profile, never from a file i
 The cluster and the NAT gateway cost money by the hour; destroy when done. On EKS, install
 ingress-nginx and metrics-server first, then run the same `helm upgrade --install` as above.
 
+The node group defaults to three spot `t3.small` instances. The account this was built on is
+on the AWS Free Tier plan, which only launches free-tier instance types, and its on-demand
+vCPU quota was already in use, so spot capacity in a small size was what fit. On a regular
+account set `node_instance_types` and `node_capacity_type` in `terraform.tfvars` to taste.
+
 ## Monitoring
 
 `monitoring/prometheus.yaml` runs Prometheus in the app namespace with RBAC to list Pods and a
@@ -178,6 +183,10 @@ rules: `BackendHighErrorRate` and `BackendDown`.
 
 `monitoring/grafana.yaml` provisions the datasource and a Pantry dashboard: requests per
 second by route, p95 latency, items added, error rate, backend Pods scraped.
+
+These are plain manifests rather than Helm values for kube-prometheus-stack. The result is the
+same two services with the same scrape and dashboard config, in a form that is readable in
+one file each and needs no chart repository on a fresh cluster.
 
 ```bash
 kubectl apply -f monitoring/
