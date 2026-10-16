@@ -40,7 +40,7 @@ variable "cluster_version" {
 
 variable "node_instance_types" {
   type    = list(string)
-  default = ["t3.medium", "t3a.medium", "t2.medium"]
+  default = ["t3.small"]
 }
 
 variable "node_capacity_type" {
@@ -50,7 +50,7 @@ variable "node_capacity_type" {
 
 variable "node_desired" {
   type    = number
-  default = 2
+  default = 3
 }
 
 variable "node_min" {
@@ -60,5 +60,5 @@ variable "node_min" {
 
 variable "node_max" {
   type    = number
-  default = 3
+  default = 4
 }

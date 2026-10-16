@@ -40,9 +40,10 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
 
   cluster_addons = {
-    coredns    = {}
-    kube-proxy = {}
-    vpc-cni    = {}
+    coredns            = {}
+    kube-proxy         = {}
+    vpc-cni            = {}
+    aws-ebs-csi-driver = {}
   }
 
   eks_managed_node_groups = {
@@ -52,6 +53,10 @@ module "eks" {
       desired_size   = var.node_desired
       min_size       = var.node_min
       max_size       = var.node_max
+
+      iam_role_additional_policies = {
+        ebs_csi = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+      }
     }
   }
 }
