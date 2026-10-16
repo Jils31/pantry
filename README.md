@@ -174,6 +174,21 @@ on the AWS Free Tier plan, which only launches free-tier instance types, and its
 vCPU quota was already in use, so spot capacity in a small size was what fit. On a regular
 account set `node_instance_types` and `node_capacity_type` in `terraform.tfvars` to taste.
 
+## Running on EKS
+
+The cluster was created with the Terraform in this repo and the chart deployed to it with the
+images CI published. In `docs/screenshots/`: `terraform-apply.png`, the AWS view of the
+cluster and network in `eks-aws-cli.png`, the deploy and `helm list` in `eks-helm-deploy.png`,
+the app through the load balancer in `eks-app-via-ingress.png`, Prometheus and Grafana in
+`eks-prometheus-*.png` and `eks-grafana-dashboard.png`, and the teardown in
+`terraform-destroy.png`.
+
+Two things came up on the way that are worth knowing if you run this on a fresh account. The
+EBS CSI driver is not installed by default on EKS, so a PVC stays `Pending` until the
+`aws-ebs-csi-driver` add-on and its IAM policy are in place; the Terraform includes both. And
+the Free Tier account plan restricts instance types, which is why the node group is spot
+`t3.small`.
+
 ## Monitoring
 
 `monitoring/prometheus.yaml` runs Prometheus in the app namespace with RBAC to list Pods and a
