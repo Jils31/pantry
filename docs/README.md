@@ -7,6 +7,7 @@ Local and CI
 | `pytest.png` | the test suite passing |
 | `compose-up-and-smoke.png` | `docker compose up -d --build`, items added, one consumed, filters, stats, metrics |
 | `app-compose.png` | the UI served by the compose stack |
+| `ci-run.png` | a GitHub Actions run on a push: tests, frontend build, both images with Trivy, kind deploy and smoke test |
 
 AWS, Terraform and EKS
 
@@ -21,6 +22,9 @@ AWS, Terraform and EKS
 | `eks-api-docs.png` | the API docs through the Ingress |
 | `eks-load-and-hpa.png` | load against the Ingress, HPA readings, `kubectl top` |
 | `eks-prometheus-queries.png` | Prometheus targets, PromQL answers, alert rules, Grafana provisioning |
-| `eks-prometheus-targets.png` | the Prometheus targets page with both backend Pods up |
+| `eks-prometheus-targets.png` | the Prometheus targets page with every backend Pod up |
+| `eks-hpa-events.png` | the HPA scaling the backend from two to five Pods under load, with its events |
+| `argocd-application.png` | the Argo CD Application, Synced and Healthy, and its spec |
+| `argocd-gitops-change.png` | a values change pushed to `main`, Argo CD on the new revision, the frontend Deployment following |
 | `eks-grafana-dashboard.png` | the provisioned Grafana dashboard with live panels |
 | `terraform-destroy.png` | `terraform destroy` removing everything |

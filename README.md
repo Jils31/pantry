@@ -217,8 +217,18 @@ consumed counter by unit.
 ## GitOps
 
 `k8s/argocd-application.yaml` points Argo CD at `helm/pantry` on `main` with automated sync,
-prune and self-heal. Replica drift on the backend Deployment is ignored because the HPA owns
-that number. Change `values.yaml`, push, and the cluster follows.
+prune and self-heal, layering `values-eks.yaml` on top for the GHCR images and the `gp2` storage
+class. Replica drift on the backend Deployment is ignored because the HPA owns that number.
+Change a values file, push, and the cluster follows: `docs/screenshots/argocd-gitops-change.png`
+shows a frontend replica change landing that way, with Argo CD reporting the new revision.
+
+On EKS, after the Terraform apply:
+
+```sh
+helm upgrade --install argocd argo/argo-cd -n argocd --create-namespace
+kubectl apply -f k8s/namespace.yaml -f k8s/argocd-application.yaml
+kubectl apply -f monitoring/prometheus.yaml -f monitoring/grafana.yaml
+```
 
 ## Troubleshooting drill
 
@@ -226,6 +236,10 @@ that number. Change `values.yaml`, push, and the cluster follows.
 diagnosis for each: a values override that points the backend at a database host that does
 not exist, and an Ingress whose `/api` path names a Service that does not exist. Both are
 found with status, events, logs, then the path between components, before anything is changed.
+
+## Demo
+
+`demo/` has the walkthrough video and the slide deck, as PPTX and PDF.
 
 ## Screenshots
 
