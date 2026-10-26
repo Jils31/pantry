@@ -10,3 +10,5 @@ postgres:
   storageClassName: gp2
 ingress:
   host: ""
+frontend:
+  replicas: 2
