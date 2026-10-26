@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Jils31/DevOps.git
+    repoURL: https://github.com/Jils31/pantry.git
     targetRevision: main
-    path: Final DevOps Project/helm/pantry
+    path: helm/pantry
     helm:
       releaseName: pantry
-      valueFiles: [values.yaml]
+      valueFiles: [values.yaml, values-eks.yaml]
   destination:
     server: https://kubernetes.default.svc
     namespace: pantry

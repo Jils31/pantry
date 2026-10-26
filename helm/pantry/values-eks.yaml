@@ -1,0 +1,12 @@
+image:
+  backend: ghcr.io/jils31/pantry/backend
+  frontend: ghcr.io/jils31/pantry/frontend
+  tag: d923ce2
+  pullPolicy: IfNotPresent
+backend:
+  replicas: 2
+postgres:
+  storage: 2Gi
+  storageClassName: gp2
+ingress:
+  host: ""
